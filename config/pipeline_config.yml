@@ -1,0 +1,83 @@
+# Ceiling ML Pipeline Configuration
+# Environment-specific settings
+
+# Pipeline Configuration
+pipeline:
+  id: ceiling_pipeline_v1
+  version: 1.0.0
+  fail_on_invalid: false
+  track_metrics: true
+
+# Model Configuration
+models:
+  base_path: /models
+  mlflow_tracking_uri: ${MLFLOW_TRACKING_URI:-http://localhost:5000}
+
+# Stage Configurations
+stages:
+  - name: light_placement
+    component_type: light
+    models:
+      - id: light_placement_v1
+        version: "1.0.0"
+        parameters:
+          spacing: 3
+      - id: light_placement_v2
+        version: "1.0.0"
+        parameters:
+          spacing: 4
+    selection_strategy: highest_confidence
+    parallel_execution: true
+    max_workers: 4
+
+  - name: air_supply_placement
+    component_type: air_supply
+    models:
+      - id: air_supply_v1
+        version: "1.0.0"
+        parameters:
+          spacing: 5
+    selection_strategy: highest_confidence
+    parallel_execution: false
+
+  - name: air_return_placement
+    component_type: air_return
+    models:
+      - id: air_return_v1
+        version: "1.0.0"
+        parameters: {}
+    selection_strategy: highest_confidence
+    parallel_execution: false
+
+  - name: smoke_detector_placement
+    component_type: smoke_detector
+    models:
+      - id: smoke_detector_v1
+        version: "1.0.0"
+        parameters:
+          spacing: 6
+    selection_strategy: highest_confidence
+    parallel_execution: false
+
+# API Configuration
+api:
+  host: 0.0.0.0
+  port: 8000
+  workers: 4
+  cors_origins:
+    - "*"
+
+# Logging
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Monitoring
+# monitoring:
+#   prometheus:
+#     enabled: true
+#     port: 9090
+#   grafana:
+#     enabled: true
+#     port: 3000
+

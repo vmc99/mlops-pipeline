@@ -1,0 +1,53 @@
+{"room_id":"room-123",
+"input_matrix":[
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,1,1,0,0,1,1,0,0],
+    [0,0,1,1,0,0,1,1,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0]],
+
+"output_matrix":[
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,2,4,0,0,2,0,0,0,0],
+    [0,0,1,1,0,0,1,1,0,0],
+    [0,0,1,1,0,0,1,1,0,5],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,2,0,0,0,2,0,0],
+    [0,0,4,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0]],
+    
+    "execution_time_ms":2.282857894897461,
+    "stages_executed":4,
+    "stage_summary":{
+        "light_placement":{
+            "model_selected":"light_placement_v2",
+            "model_version":"1.0.0",
+            "placements":4,
+            "confidence":0.92,
+            "execution_time_ms":0.019788742065429688,
+            "is_valid":true},
+        "air_supply_placement":{
+            "model_selected":"air_supply_v1",
+            "model_version":"1.0.0",
+            "placements":0,
+            "confidence":0.87,
+            "execution_time_ms":0.0019073486328125,
+            "is_valid":true},
+        "air_return_placement":{
+            "model_selected":"air_return_v1",
+            "model_version":"1.0.0","placements":2,
+            "confidence":0.85,
+            "execution_time_ms":0.010967254638671875,
+            "is_valid":true},
+        "smoke_detector_placement":{
+            "model_selected":"smoke_detector_v1",
+            "model_version":"1.0.0",
+            "placements":1,
+            "confidence":0.95,
+            "execution_time_ms":0.0050067901611328125,
+            "is_valid":true}
+        }
+}                                     

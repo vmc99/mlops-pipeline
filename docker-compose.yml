@@ -1,0 +1,31 @@
+services:
+  # FastAPI Backend
+  api:
+    build: .
+    container_name: mlops-api
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_HOST=http://host.docker.internal:11434
+    volumes:
+      - ./config:/app/config
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Streamlit UI
+  ui:
+    build: .
+    container_name: mlops-ui
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://api:8000
+    command: streamlit run src/ui/app.py --server.address=0.0.0.0 --server.port=8501
+    depends_on:
+      - api
+    restart: unless-stopped
+
