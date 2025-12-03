@@ -152,3 +152,9 @@ curl -X POST "http://localhost:8000/pipeline/run" \
 - `GET /pipeline/stages` - View pipeline configuration
 - `POST /pipeline/run/async` - Async execution
 - `GET /pipeline/job/{job_id}` - Check async job status
+
+### Run Tests
+
+```bash
+pytest tests/test_pipeline.py -v 2>&1
+```
